@@ -141,8 +141,8 @@ def returnHeader():
             '\n❗️В наличии в Севастополе'
             '\n💸Оплата наличными при получении'
             '\n'
-            '\n💬ДЛЯ ЗАКАЗА💬'
-            '\n📞 WhatsApp: https://wa.me/79787922235')
+            '\n💬**ДЛЯ ЗАКАЗА**💬'
+            '\n📞 WhatsApp: ** https://wa.me/79787922235 **')
     return txt
 
 for x in range(len(first_column)): 
@@ -164,6 +164,12 @@ def baseFix(name):
         return name
 
 def getApple(a):
+    def fixName(name):
+        replaceMacbook = name.replace("MacBook ", "")
+        replaceApple = replaceMacbook.replace("Apple ", "")
+        replaceWatch = replaceApple.replace("Watch ", "")
+        return replaceWatch.replace("iPhone ", "")
+        
     isAppleiPhone = False
     
     isAppleWatchSE2023 = False
@@ -180,7 +186,7 @@ def getApple(a):
     res.append("📲 **Apple**")
     for i in a:
         if ("AirPods" in i or 'Apple Magic' in i or 'Apple Battery' in i or 'Apple TV' in i or 'Apple HomePod' in i or 'Apple AirTag' in i) and baseFix(i):
-            res.append(i)
+            res.append(fixName(i))
     #######################
     for i in a:
         if "iPhone" in i and baseFix(i):
@@ -190,7 +196,7 @@ def getApple(a):
         res.append("📲 **Apple iPhone**")
     for i in a:
         if "iPhone" in i and baseFix(i):
-            res.append(i)
+            res.append(fixName(i))
     #######################
     for i in a:
         if ("SE 2023 Gen" in i or "Watch SE 2023" in i) and baseFix(i):
@@ -200,7 +206,7 @@ def getApple(a):
         res.append("⌚️ **Apple Watch SE 2023**")
     for i in a:
         if ("SE 2023 Gen" in i or "Watch SE 2023" in i) and baseFix(i):
-            res.append(i)
+            res.append(fixName(i))
     #######################    
     for i in a:
         if ("Apple Watch S8" in i) and baseFix(i):
@@ -210,7 +216,7 @@ def getApple(a):
         res.append("⌚️ **Apple Watch S8**")
     for i in a:
         if ("Apple Watch S8" in i) and baseFix(i):
-            res.append(i) 
+            res.append(fixName(i)) 
     #######################    
     for i in a:
         if ("Apple Watch S9" in i) and baseFix(i):
@@ -220,7 +226,7 @@ def getApple(a):
         res.append("⌚️ **Apple Watch S9**")
     for i in a:
         if ("Apple Watch S9" in i) and baseFix(i):
-            res.append(i) 
+            res.append(fixName(i)) 
     #######################    
     for i in a:
         if ("Apple Watch S10" in i) and baseFix(i):
@@ -230,7 +236,7 @@ def getApple(a):
         res.append("⌚️ **Apple Watch S10**")
     for i in a:
         if ("Apple Watch S10" in i) and baseFix(i):
-            res.append(i) 
+            res.append(fixName(i)) 
     #######################    
     for i in a:
         if ("Apple Watch Ultra" in i) and baseFix(i):
@@ -240,7 +246,7 @@ def getApple(a):
         res.append("⌚️ **Apple Watch Ultra**")
     for i in a:
         if ("Apple Watch Ultra" in i) and baseFix(i):
-            res.append(i) 
+            res.append(fixName(i)) 
     #######################    
     for i in a:
         if ("iPad" in i) and baseFix(i):
@@ -250,7 +256,7 @@ def getApple(a):
         res.append("📟 **Apple iPad**")
     for i in a:
         if ("iPad" in i) and baseFix(i):
-            res.append(i)
+            res.append(fixName(i))
     #######################    
     for i in a:
         if ("MacBook" in i) and baseFix(i):
@@ -260,7 +266,7 @@ def getApple(a):
         res.append("💻 **Apple MacBook**")
     for i in a:
         if ("MacBook" in i) and baseFix(i):
-            res.append(i)
+            res.append(fixName(i))
     #######################    
     for i in a:
         if ("iMac" in i) and baseFix(i):
@@ -270,7 +276,396 @@ def getApple(a):
         res.append("💻 **Apple iMac**")
     for i in a:
         if ("iMac" in i) and baseFix(i):
+            res.append(fixName(i))
+    
+    return '\n'.join([str(i) for i in res])
+
+def getSamsung(a):
+    def fixName(name):
+        return name.replace("Samsung Galaxy", '')
+    
+    isGalaxyPhone = False
+    isGalaxyTab = False
+    #################
+    res = []
+    for i in a:
+        if "Samsung Galaxy" in i and 'Galaxy Tab' not in i and baseFix(i):
+            isGalaxyPhone = True
+    if isGalaxyPhone is True:
+        res.append("📲 **Samsung Galaxy**")
+    for i in a:
+        if ("Samsung Galaxy" in i and 'Galaxy Tab' not in i) and baseFix(i):
+            res.append(fixName(i))
+    #######################
+    for i in a:
+        if "Galaxy Tab" in i and baseFix(i):
+            isGalaxyTab = True
+    if isGalaxyTab is True:
+        res.append('')
+        res.append("📟 **Galaxy Tab**")
+    for i in a:
+        if ('Galaxy Tab' in i) and baseFix(i):
             res.append(i)
+    
+    return '\n'.join([str(i) for i in res])
+
+def getCoros(a):
+    def fixName(name):
+        replaceAsus = name.replace("Asus ", '')
+        replaceCoros = replaceAsus.replace("Coros ", '')
+        replaceSony = replaceCoros.replace("Sony ", '')
+        replaceOnePlus = replaceSony.replace("OnePlus ", '')
+        replaceZTE = replaceOnePlus.replace("ZTE ", '')
+        return replaceZTE.replace("Dyson ", '')
+    
+    isHuawei = False
+    isCoros = False
+    isGoogle = False
+    isPS = False
+    isGoPro = False
+    isFinis = False
+    isAsus = False
+    isNothing = False
+    isOnePlus = False
+    isZTE = False
+    isDyson = False
+    isSony = False
+    #################
+    res = []
+    for i in a:
+        if "Huawei" in i and baseFix(i):
+            isHuawei = True
+    if isHuawei is True:
+        res.append("📲 **Huawei**")
+    for i in a:
+        if "Huawei" in i and baseFix(i):
+            res.append(fixName(i))
+    #######################
+    for i in a:
+        if "Coros" in i and baseFix(i):
+            isCoros = True
+    if isCoros is True:
+        res.append('')
+        res.append("📲 **Coros**")
+    for i in a:
+        if 'Coros' in i and baseFix(i):
+            res.append(i)
+    #######################
+    for i in a:
+        if "Google" in i and baseFix(i):
+            isGoogle = True
+    if isGoogle is True:
+        res.append('')
+        res.append("📲 **Google**")
+    for i in a:
+        if 'Google' in i and baseFix(i):
+            res.append(i)
+    #######################
+    for i in a:
+        if ("PlayStation" in i or "DualSense" in i or "Xbox" in i) and baseFix(i):
+            isPS = True
+    if isPS is True:
+        res.append('')
+        res.append("🎮 **Playstation / Xbox** 🎮")
+    for i in a:
+        if ("PlayStation" in i or "DualSense" in i or "Xbox" in i) and baseFix(i):
+            res.append(i)
+    #######################
+    for i in a:
+        if ("GoPro" in i or "Protective" in i or "El Grande" in i and '3-Way' in i) and baseFix(i):
+            isGoPro = True
+    if isGoPro is True:
+        res.append('')
+        res.append("📹 **GoPro**")
+    for i in a:
+        if ("GoPro" in i or "Protective" in i or "El Grande" in i and '3-Way' in i) and baseFix(i):
+            res.append(i)
+    #######################
+    for i in a:
+        if "Finis" in i and baseFix(i):
+            isFinis = True
+    if isFinis is True:
+        res.append('')
+        res.append("📲 **Finis**")
+    for i in a:
+        if "Finis" in i and baseFix(i):
+            res.append(i)
+    #######################
+    for i in a:
+        if "Asus" in i and baseFix(i):
+            isAsus = True
+    if isAsus is True:
+        res.append('')
+        res.append("📲 **Asus**")
+    for i in a:
+        if "Asus" in i and baseFix(i):
+            res.append(i)
+    #######################
+    for i in a:
+        if "Nothing" in i and baseFix(i):
+            isNothing = True
+    if isNothing is True:
+        res.append('')
+        res.append("📲 **Nothing Phone**")
+    for i in a:
+        if "Nothing" in i and baseFix(i):
+            res.append(i)
+    #######################
+    for i in a:
+        if "OnePlus" in i and baseFix(i):
+            isOnePlus = True
+    if isOnePlus is True:
+        res.append('')
+        res.append("📲 **OnePlus**")
+    for i in a:
+        if "OnePlus" in i and baseFix(i):
+            res.append(i)
+    #######################
+    for i in a:
+        if "ZTE" in i and baseFix(i):
+            isZTE = True
+    if isZTE is True:
+        res.append('')
+        res.append("📲 **ZTE**")
+    for i in a:
+        if "ZTE" in i and baseFix(i):
+            res.append(i)
+    #######################
+    for i in a:
+        if "Dyson" in i and baseFix(i):
+            isDyson = True
+    if isDyson is True:
+        res.append('')
+        res.append("📲 **Dyson**")
+    for i in a:
+        if "Dyson" in i and baseFix(i):
+            res.append(i)
+    #######################
+    for i in a:
+        if "Xperia" in i and baseFix(i):
+            isSony = True
+    if isSony is True:
+        res.append('')
+        res.append("📲 **Sony**")
+    for i in a:
+        if "Xperia" in i and baseFix(i):
+            res.append(i)
+    
+    return '\n'.join([str(i) for i in res])
+
+def getXiaomiYandexJBL(a):
+    def fixName(name):
+        fixPoco = name.replace("Pocophone", 'Poco')
+        replaceRedmi = fixPoco.replace("Redmi Note", 'Note')
+        fixMI = replaceRedmi.replace("Xiaomi 1 ", 'Mi 1')
+        return fixMI.replace("Xiaomi  ", '')
+    
+    isXiaomi = False
+    isYandex = False
+    isJBL = False
+    isShokz = False
+    #################
+    res = []
+    for i in a:
+        if ("Xiaomi" in i or 'Poco' in i) and baseFix(i):
+            isXiaomi = True
+    if isXiaomi is True:
+        res.append("📲 **Xiaomi**")
+    for i in a:
+        if ("Xiaomi" in i or 'Poco' in i) and baseFix(i):
+            res.append(fixName(i))
+    #######################
+    for i in a:
+        if "Яндекс" in i and baseFix(i):
+            isYandex = True
+    if isYandex is True:
+        res.append('')
+        res.append("🔊 **Яндекс Станция**")
+    for i in a:
+        if 'Яндекс' in i and baseFix(i):
+            res.append(i)
+    #######################
+    for i in a:
+        if "JBL" in i and baseFix(i):
+            isJBL = True
+    if isJBL is True:
+        res.append('')
+        res.append("🔊 **JBL**")
+    for i in a:
+        if 'JBL' in i and baseFix(i):
+            res.append(i)
+    #######################
+    for i in a:
+        if "Shokz" in i and baseFix(i):
+            isShokz = True
+    if isShokz is True:
+        res.append('')
+        res.append("👓 **Shokz**")
+    for i in a:
+        if 'Shokz' in i and baseFix(i):
+            res.append(i)
+    
+    return '\n'.join([str(i) for i in res])
+
+def getUsed(a):
+    def checkUsed(name):
+        return (
+        '"A-"' in name  or
+        '"A"' in name or
+        '"A+"' in name  or
+        '"B-"' in name  or
+        '"B"' in name or
+        '"B+"' in name  or
+        '"C-"' in name  or
+        '"C"' in name or
+        '"C+"' in name 
+    )
+    
+    def fixName(name):
+        replaceAW = name.replace("Apple Watch ", '')
+        replaceCoros = replaceAW.replace("Coros ", '')
+        replaceApple = replaceCoros.replace("Apple ", '')
+        replaceiPhone = replaceApple.replace("iPhone ", '')
+        replaceMacBook = replaceiPhone.replace("MacBook ", '')
+        replaceXiaomi = replaceMacBook.replace("Xiaomi Redmi", 'Redmi')
+        replacePoco = replaceXiaomi.replace("Pocophone", 'Poco')
+        fixMYD = replacePoco.replace("🇲🇾DA", 'MYDA')
+        return fixMYD.replace("Samsung ", '')
+    
+    isDemo = False
+    isAWSE = False
+    isAWS8 = False
+    isAWS9 = False    
+    isiPad = False
+    isMacBook = False
+    isiMac = False
+    isiPhone = False
+    isSams = False
+    isXiaomi = False
+    isOther = False
+    #################
+    res = []
+    res.append('👇 **Идеальное БУ**')      
+    res.append("🍏 Apple")
+    for i in a:
+        if ("AirPods" in i or 'Apple Magic' in i or 'Apple Battery' in i or 'Apple TV' in i or 'Apple HomePod' in i or 'Apple AirTag' in i or 'Pencil' in i)  and checkUsed(i):
+            res.append(fixName(i))
+    #######################
+    for i in a:
+        if "iPhone" in i and checkUsed(i):
+            isiPhone = True
+    if isiPhone is True:
+        res.append('')
+        res.append("📱 **Apple iPhone**")
+    for i in a:
+        if 'iPhone' in i and checkUsed(i):
+            res.append(fixName(i))
+    #######################
+    for i in a:
+        if "Watch SE" in i and checkUsed(i):
+            isAWSE = True
+    if isAWSE is True:
+        res.append('')
+        res.append("⌚️ **Apple Watch SE 2023**")
+    for i in a:
+        if 'Watch SE' in i and checkUsed(i):
+            res.append(fixName(i))
+    #######################
+    for i in a:
+        if "Watch S8" in i and checkUsed(i):
+            isAWS8 = True
+    if isAWS8 is True:
+        res.append('')
+        res.append("⌚️ **Apple Watch S8**")
+    for i in a:
+        if 'Watch S8' in i and checkUsed(i):
+            res.append(fixName(i))
+    #######################
+    for i in a:
+        if "Watch S9" in i and checkUsed(i):
+            isAWS9 = True
+    if isAWS9 is True:
+        res.append('')
+        res.append("⌚️ **Apple Watch S9**")
+    for i in a:
+        if 'Watch S9' in i and checkUsed(i):
+            res.append(fixName(i))
+    #######################
+    for i in a:
+        if "iPad" in i and checkUsed(i):
+            isiPad = True
+    if isiPad is True:
+        res.append('')
+        res.append("📟 **Apple iPad**")
+    for i in a:
+        if 'iPad' in i and checkUsed(i):
+            res.append(fixName(i))
+    #######################
+    for i in a:
+        if "MacBook" in i and checkUsed(i):
+            isMacBook = True
+    if isMacBook is True:
+        res.append('')
+        res.append("💻 **Apple MacBook**")
+    for i in a:
+        if "MacBook" in i and checkUsed(i):
+            res.append(fixName(i))
+    #######################
+    for i in a:
+        if "iMac" in i and checkUsed(i):
+            isiMac = True
+    if isiMac is True:
+        res.append('')
+        res.append("🖥️ **Apple iMac**")
+    for i in a:
+        if "iMac" in i and checkUsed(i):
+            res.append(fixName(i))
+    #######################
+    for i in a:
+        if "Samsung" in i and checkUsed(i):
+            isSams = True
+    if isSams is True:
+        res.append('')
+        res.append("📱 **Samsung**")
+    for i in a:
+        if "Samsung" in i and checkUsed(i):
+            res.append(fixName(i))
+    #######################
+    for i in a:
+        if ("Xiaomi" in i or "Poco" in i) and checkUsed(i):
+            isXiaomi = True
+    if isXiaomi is True:
+        res.append('')
+        res.append("📱 **Xiaomi**")
+    for i in a:
+        if ("Xiaomi" in i or "Poco" in i) and checkUsed(i):
+            res.append(fixName(i))
+    #######################
+    for i in a:
+        if "Xiaomi" not in i and "Poco" not in i and "Samsung" not in i and "Apple" not in i and checkUsed(i):
+            isOther = True
+    if isOther is True:
+        res.append('')
+        res.append("📱 **Остальные бренды**")
+    for i in a:
+        if "Xiaomi" not in i and "Poco" not in i and "Samsung" not in i and "Apple" not in i and checkUsed(i):
+            res.append(fixName(i))
+    #######################
+    res.append('')
+    res.append("🏷 **Пломбы**")
+    for i in a:
+        if "Пломба" in i:
+            res.append(fixName(i))
+    #######################
+    for i in a:
+        if ("Обменка" in i or "обменка" in i or "Демо" in i):
+            isDemo = True
+    if isDemo is True:
+        res.append('')
+        res.append("🔥 **Обменки / Демо**")
+    for i in a:
+        if ("Обменка" in i or "обменка" in i or "Демо" in i):
+            res.append(fixName(i))
     
     return '\n'.join([str(i) for i in res])
 
@@ -283,6 +678,11 @@ async def echo_message(message: types.Message):
     if message.text == 'Return Price from base':
         await message.answer(returnHeader(), reply_markup=btn)
         await message.answer(getApple(name), reply_markup=btn)
+        await message.answer(getSamsung(name), reply_markup=btn)
+        await message.answer(getCoros(name), reply_markup=btn)
+        await message.answer(getXiaomiYandexJBL(name), reply_markup=btn)
+        await message.answer(getUsed(name), reply_markup=btn)
+        
     # await message.answer(get(name[50:100]), reply_markup=btn)
     # await message.answer(get(name[100:150]), reply_markup=btn)
     # await message.answer(get(name[150:200]), reply_markup=btn)
