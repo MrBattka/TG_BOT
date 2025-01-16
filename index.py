@@ -5,12 +5,13 @@ import logging.config
 from aiogram import Bot
 from aiogram import Dispatcher
 from aiogram import types
+import aiogram.utils.markdown as md
 
 import openpyxl
 
 from datetime import date
 # Define variable to load the wookbook
-wookbook = openpyxl.load_workbook("priceFromBase.xlsx")
+wookbook = openpyxl.load_workbook("../priceFromBase.xlsx")
 # Define variable to read the active sheet:
 worksheet = wookbook.active
 name = []
@@ -152,6 +153,8 @@ for x in range(len(first_column)):
 
 
 BOT_TOKEN = '7797795450:AAGS2CY8V0D6lhK9FHfU8afMbWx40PEOctY'
+# CHANNEL_ID = -1001289177853 # TG Default
+CHANNEL_ID = -1002384328012 # TG Test
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
@@ -168,7 +171,8 @@ def getApple(a):
         replaceMacbook = name.replace("MacBook ", "")
         replaceApple = replaceMacbook.replace("Apple ", "")
         replaceWatch = replaceApple.replace("Watch ", "")
-        return replaceWatch.replace("iPhone ", "")
+        fixUSB = replaceWatch.replace("🇺🇸B-C", 'USB-C - ')
+        return fixUSB.replace("iPhone ", "")
         
     isAppleiPhone = False
     
@@ -545,7 +549,9 @@ def getUsed(a):
     isOther = False
     #################
     res = []
-    res.append('👇 **Идеальное БУ**')      
+    res.append('👇 **Идеальное БУ**')
+    res.append('')
+       
     res.append("🍏 Apple")
     for i in a:
         if ("AirPods" in i or 'Apple Magic' in i or 'Apple Battery' in i or 'Apple TV' in i or 'Apple HomePod' in i or 'Apple AirTag' in i or 'Pencil' in i)  and checkUsed(i):
@@ -652,6 +658,8 @@ def getUsed(a):
             res.append(fixName(i))
     #######################
     res.append('')
+    res.append('──── ୨୧ ────')
+    res.append('')
     res.append("🏷 **Пломбы**")
     for i in a:
         if "Пломба" in i:
@@ -661,6 +669,8 @@ def getUsed(a):
         if ("Обменка" in i or "обменка" in i or "Демо" in i):
             isDemo = True
     if isDemo is True:
+        res.append('')
+        res.append('──── ୨୧ ────')
         res.append('')
         res.append("🔥 **Обменки / Демо**")
     for i in a:
@@ -672,16 +682,42 @@ def getUsed(a):
 @dp.message()
 async def echo_message(message: types.Message):
     btn = types.ReplyKeyboardMarkup(keyboard=[
-        [types.KeyboardButton(text='Return Price from base')]
-    ])
+        [types.KeyboardButton(text='base')]
+    ], resize_keyboard=True)
     
-    if message.text == 'Return Price from base':
+    if message.text == '/start':
         await message.answer(returnHeader(), reply_markup=btn)
-        await message.answer(getApple(name), reply_markup=btn)
-        await message.answer(getSamsung(name), reply_markup=btn)
-        await message.answer(getCoros(name), reply_markup=btn)
-        await message.answer(getXiaomiYandexJBL(name), reply_markup=btn)
-        await message.answer(getUsed(name), reply_markup=btn)
+        await message.answer(getApple(removeDouble), reply_markup=btn)
+        await message.answer(getSamsung(removeDouble), reply_markup=btn)
+        await message.answer(getCoros(removeDouble), reply_markup=btn)
+        await message.answer(getXiaomiYandexJBL(removeDouble), reply_markup=btn)
+        await message.answer(getUsed(removeDouble), reply_markup=btn)
+    
+    if message.text == 'base':
+        await message.answer(returnHeader(), reply_markup=btn)
+        await message.answer(getApple(removeDouble), reply_markup=btn)
+        await message.answer(getSamsung(removeDouble), reply_markup=btn)
+        await message.answer(getCoros(removeDouble), reply_markup=btn)
+        await message.answer(getXiaomiYandexJBL(removeDouble), reply_markup=btn)
+        await message.answer(getUsed(removeDouble), reply_markup=btn)
+        await bot.send_message(
+            chat_id=CHANNEL_ID,
+            text=returnHeader())
+        await bot.send_message(
+            chat_id=CHANNEL_ID,
+            text=getApple(removeDouble))
+        await bot.send_message(
+            chat_id=CHANNEL_ID,
+            text=getSamsung(removeDouble))
+        await bot.send_message(
+            chat_id=CHANNEL_ID,
+            text=getCoros(removeDouble))
+        await bot.send_message(
+            chat_id=CHANNEL_ID,
+            text=getXiaomiYandexJBL(removeDouble))
+        await bot.send_message(
+            chat_id=CHANNEL_ID,
+            text=getUsed(removeDouble))
         
     # await message.answer(get(name[50:100]), reply_markup=btn)
     # await message.answer(get(name[100:150]), reply_markup=btn)
