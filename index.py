@@ -178,10 +178,7 @@ for x in range(len(first_column)):
             used.append(f'{returnFlags(first_column[x].value)}{second_column[x].value} imei{third_column[x].value}')
 
 
-BOT_TOKEN = '7797795450:AAGS2CY8V0D6lhK9FHfU8afMbWx40PEOctY'
-CHANNEL_ID = -1001289177853 # TG Default
-# CHANNEL_ID = -1002384328012 # TG Test
-CHANNEL_ID_PHOTO = "-1001545286162"
+
 
 
 
